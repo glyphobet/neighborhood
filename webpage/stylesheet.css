@@ -1,0 +1,20 @@
+body {
+  background-color: #e2e2e2;
+  font-family: Verdana    , /* The OSX system font */
+               'Gill Sans', /* Better Than Helvetica */
+               sans-serif ; 
+} 
+
+p {
+  text-align:justify;
+}
+
+div.errors {
+  color:#903030;
+  font-size: 12px;
+}
+
+div.status {
+  color:#309030;
+  font-size: 12px;
+}
