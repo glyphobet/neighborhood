@@ -1,1 +1,5 @@
+config.py
 .cdv/
+.*.pyc
+map.*.png
+map.log.*
