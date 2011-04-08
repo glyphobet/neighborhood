@@ -32,7 +32,7 @@ while 1:
     except EOFError:
         break
     except KeyboardInterrupt:
-        break    
+        break
 
     try:
         h = raw_input('neighborhood:> ')

@@ -114,11 +114,11 @@ class Map(object):
 
     def to_image(self, lng, lat):
         #print 'pt', lng, lat
-    
+
         lngpos = (self.lngbound[1] - lng)
         latpos = (self.latbound[1] - lat)
         #print 'pos', lngpos, latpos
-    
+
         lngpct = lngpos / self.lngrng
         latpct = latpos / self.latrng
         #print 'pct', lngpct, latpct
@@ -126,7 +126,7 @@ class Map(object):
         x = self.image_size[0] - (lngpct * self.image_size[0])
         y = latpct * self.image_size[1]
         return (x,y)
-       
+
 
 class BackgroundMap(Map):
     def __init__(self, mapname):
@@ -204,7 +204,7 @@ draw = mapDraw(final)
 
 for h, hood in enumerate(hoods):
         average = hood_averages[hood]
-    
+
         # draw labels
         labels = hood.split(' / ')
         center = m.to_image(*average)

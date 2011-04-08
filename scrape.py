@@ -99,7 +99,7 @@ def scrape_RSS(rss_url):
         if 'craigslist.org/sfc/vac/' in url:
             log('skipping ' + url)
             continue
-        
+
         if not test:
             if database.get_by_url(url):
                 # skip duplicates
