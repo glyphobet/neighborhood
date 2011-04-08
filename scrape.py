@@ -160,16 +160,11 @@ def _scrape_posting(database, hood, url):
 
 
 # main
-while True:
-    try:
-        scrape_RSS(config['rss_url'])
-        #scrape_HTML(config['html_url'])
-        log('sleeping')
-        time.sleep(5*60)
-    except KeyboardInterrupt:
-        sys.exit()
-    except Exception, e:
-        log(e)
-        log('sleeping after error')
-        time.sleep(30)
-        
+try:
+    scrape_RSS(config['rss_url'])
+    #scrape_HTML(config['html_url'])
+except KeyboardInterrupt:
+    sys.exit(0)
+except Exception, e:
+    log(e)
+    sys.exit(1)
