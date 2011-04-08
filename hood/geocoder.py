@@ -14,17 +14,28 @@ import re
 import sys
 import time 
 from xmlrpclib import ServerProxy
-from config import config
 
-geocoder = ServerProxy(config['geocoder'])
+
+geocoder = None
+_config = None
+
+def init(config):
+    global geocoder, _config
+    geocoder = ServerProxy(config['geocoder'])
+    _config = config
+
 
 broken_loc_pat  = re.compile('(\d+\s.+)(?:(?:and)|&).*')
 broken_loc_pat2 = re.compile('(\w+)\.,?\s+and')
 and_split_pat = re.compile('(?:\s+and\s+)|(?:\s*(?:&|/)\s*)')
 
-def geocode(loc, citystate=config['citystate'], delay=10):
+
+def geocode(loc, citystate=None, delay=10):
+    global _config
+    if citystate is None:
+        citystate = _config['citystate']
     latitude, longitude = None, None
-    g = geocoder.geocode(loc+citystate)
+    g = geocoder.geocode(loc + citystate)
     if g and (not g[0].has_key('lat') or not g[0].has_key('long')):
         loc = loc.replace(' at ', ' and ')
         # first try to find an address 
@@ -32,14 +43,14 @@ def geocode(loc, citystate=config['citystate'], delay=10):
         if fixed_locs:
             fixed_loc = fixed_locs[0]
             time.sleep(delay)
-            g = geocoder.geocode(fixed_loc+citystate)
+            g = geocoder.geocode(fixed_loc + citystate)
 
         if g and (not g[0].has_key('lat') or not g[0].has_key('long')):
             # second try to find an intersection
             fixed_loc = broken_loc_pat2.sub('and', loc)
             if fixed_loc:
                 time.sleep(delay)
-                g = geocoder.geocode(fixed_loc+citystate)
+                g = geocoder.geocode(fixed_loc + citystate)
 
         if g and (not g[0].has_key('lat') or not g[0].has_key('long')):
             # third try to split on and/&/slash

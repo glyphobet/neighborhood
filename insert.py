@@ -16,6 +16,8 @@ from hood import import db, geocoder
 from hood.config import config
 
 
+geocoder.init(config)
+
 print 'caution!'
 #sys.exit()
 test = False

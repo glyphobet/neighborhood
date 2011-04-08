@@ -21,6 +21,8 @@ from hood import db, geocoder
 from hood.config import config
 
 
+geocoder.init(config)
+
 def log(message):
     print message
 
@@ -139,7 +141,7 @@ def _scrape_posting(database, hood, url):
     citystate = config['citystate']
     latitude, longitude = None, None
     if loc:
-        latitude, longitude = geocoder.geocode(loc, citystate)
+        latitude, longitude = geocoder.geocode(loc + citystate)
     if test: print latitude, longitude
 
     if not test:

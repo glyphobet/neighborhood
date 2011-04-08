@@ -24,6 +24,8 @@ sys.path.append( app_root )
 from hood import geocoder, db
 from hood.config import config
 
+geocoder.init(config)
+
 
 keys = ('loc', 'hood', 'newhood')
 

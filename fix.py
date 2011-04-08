@@ -14,6 +14,7 @@ from hood import db, geocoder
 from hood.config import config
 
 database = db.DB(config)
+geocoder.init(config)
 
 fixable_rows = database.get_fixable()
 
