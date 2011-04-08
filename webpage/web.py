@@ -41,51 +41,51 @@ form = """
     </div>
     <form action="web.py" method="get" onsubmit="var b = document.getElementById('submit');b.value='Please wait...';b.disabled=True;">
       <script>
-	function menuchanged(){
-	  var newhood = document.getElementById('newhood_id');
-	  var other = document.getElementById('other_id');
-	  if (other.selected) {
-	    newhood.style.display='block';
-	  } else {
-	    newhood.style.display='none';
-	  }
-	}
+        function menuchanged(){
+          var newhood = document.getElementById('newhood_id');
+          var other = document.getElementById('other_id');
+          if (other.selected) {
+            newhood.style.display='block';
+          } else {
+            newhood.style.display='none';
+          }
+        }
       </script>
       <table>
         <tr>
-	  <td align="right">
-	    <nobr>
+          <td align="right">
+            <nobr>
               <b>Address / Intersection: </b>
             </nobr>
-	  </td>
-	  <td colspan="2">
+          </td>
+          <td colspan="2">
             <nobr>
               <input type="text" size="30" maxlength="255" name="loc"/>%(citystate)s
             </nobr>
-	  </td>
+          </td>
         </tr>
         <tr>
-	  <td align="right">
-	    <nobr>
+          <td align="right">
+            <nobr>
               <b>Neighborhood:</b>
             </nobr>
-	  </td>
-	  <td>
-	    <select name="hood" id="select" onchange="menuchanged();">
+          </td>
+          <td>
+            <select name="hood" id="select" onchange="menuchanged();">
               <option name="" value=""></option>
 %(hoods)s
               <option name="other" id="other_id">other</option>
-	    </select>
+            </select>
             <input type="text" id="newhood_id" name="newhood">
-	  </td>
-	  <td colspan="2" align="right">
-	    <input id="submit" type="submit" value="Submit">
-	  </td>
+          </td>
+          <td colspan="2" align="right">
+            <input id="submit" type="submit" value="Submit">
+          </td>
         </tr>
       </table>
       <script>
-	menuchanged();
-      </script>      
+        menuchanged();
+      </script>
     </form>
   </body>
 </html>
@@ -98,7 +98,7 @@ def parseargs(args):
     items = args.split('&')
     for item in items:
         key, val = item.split('=')
-	if key in keys:
+        if key in keys:
             val = urllib.unquote(val)
             val = val.replace('+', ' ')
             val = val.decode('latin1', 'ignore').encode('utf-8')
@@ -113,9 +113,9 @@ def parseargs(args):
         errors.append('You must enter a neighborhood name')
     elif (data['hood'] == 'other'):
         if data.has_key('newhood'):
-	    data['hood'] = data['newhood'].lower().strip()
-	else:
-	    errors.append('You must enter a new neighborhood name')
+            data['hood'] = data['newhood'].lower().strip()
+        else:
+            errors.append('You must enter a new neighborhood name')
 
     return data, errors
 
@@ -162,7 +162,7 @@ def add_location(req, database):
             pass
 
     return data, status, errors
-    
+
 
 def make_page(req, database, data, status, errors):
     error_str = '\n'.join(['<b>Error:</b> %s<br>'%e for e in errors])
@@ -177,7 +177,7 @@ def make_page(req, database, data, status, errors):
     defhood = None
     if data.has_key('hood'):
         defhood = data['hood']
-        
+
     for n in hoods:
         hood_options.append('<option value="%s" %s>%s</option>'%(
             n,
@@ -217,8 +217,8 @@ def handler(req):
             smtp.quit()
         except smtplib.SMTPException:
             pass
-        
+
         req.content_type = 'text/plain'
         req.write(error_str)
-    
+
     return apache.OK
