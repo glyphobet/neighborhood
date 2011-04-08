@@ -2,14 +2,14 @@
 createuser -S -D -R -P hood
 createdb -E UNICODE -O hood hood
 createlang plpgsql hoodtest
-psql hood hood < schema.sql
-psql hood hood < trigger.sql
+psql hood hood < schema/schema.sql
+psql hood hood < schema/trigger.sql
 
 # how to dump the db
 pg_dump -F c -U hood hood > neighborhood.pgdmp
 
 # how to dump the schema
-pg_dump -s -U hood -Fp -f schema.sql hood
+pg_dump -s -U hood -Fp -f schema/schema.sql hood
 
 # how to export the data to CSV, in psql
 \copy tablename TO tablename.csv WITH CSV HEADER
