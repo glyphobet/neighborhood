@@ -19,8 +19,8 @@ import Image
 import ImageEnhance
 
 from hood import db
-from hood.config import config, maps
 from hood.render import mapDraw, render_init
+from config import config, maps
 
 
 max_image_dimension = 2**10 #9 * 3

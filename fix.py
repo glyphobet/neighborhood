@@ -11,7 +11,7 @@
 ##GNU General Public License for more details.
 
 from hood import db, geocoder
-from hood.config import config
+from config import config
 
 database = db.DB(config)
 geocoder.init(config)

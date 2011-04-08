@@ -18,7 +18,7 @@ import time
 from RSS import ns, CollectionChannel, TrackingChannel
 
 from hood import db, geocoder
-from hood.config import config
+from config import config
 
 
 geocoder.init(config)

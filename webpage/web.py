@@ -22,7 +22,7 @@ import sys
 sys.path.append( app_root )
 
 from hood import geocoder, db
-from hood.config import config
+from config import config
 
 geocoder.init(config)
 

@@ -13,7 +13,7 @@
 import sys
 
 from hood import import db, geocoder
-from hood.config import config
+from config import config
 
 
 geocoder.init(config)
