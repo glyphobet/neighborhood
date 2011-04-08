@@ -19,6 +19,7 @@ from xmlrpclib import ServerProxy
 geocoder = None
 _config = None
 
+
 def init(config):
     global geocoder, _config
     geocoder = ServerProxy(config['geocoder'])

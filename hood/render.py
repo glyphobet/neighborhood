@@ -23,11 +23,13 @@ _blobthresh_r   = None
 _blobouter_r    = None
 _blobmask_r     = None
 
+
 def render_init(config):
     global _config
     _config = config
     _calc_blob_mask(config)
     return
+
 
 def _calc_blob_mask(config):
     global _blobthresh_r, _blobouter_r, _blobmask_r

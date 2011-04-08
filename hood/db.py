@@ -28,6 +28,7 @@ class DB(object):
         self.conn = psycopg.connect("host=%s dbname=%s user=%s password=%s"
                                     % (self.host, self.db, self.user, self.pwd))
 
+
     def close_db(self):
         self.conn.close()
 
@@ -38,7 +39,7 @@ class DB(object):
 
     def _key_tuple(self, keys):
         return ['%s = %%(%s)s'%(k,k) for k in keys]
-        
+
 
     def get(self, select, d):
         curs = self.cursor()
@@ -49,9 +50,9 @@ class DB(object):
         while row is not None:
             res.append(row)
             row = curs.fetchone()
-        
+
         return res
-        
+
 
     def get_by_dict(self, d):
         select = """
@@ -91,7 +92,6 @@ class DB(object):
         stddev = stats[2:]
 
         return avg, stddev, hoods
-
 
 
     def get_mappable_no_hood(self, hood, distinct=True):
@@ -149,6 +149,3 @@ class DB(object):
         curs = self.cursor()
         curs.execute(update, values)
         self.conn.commit()
-        
-
-        
