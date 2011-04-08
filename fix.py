@@ -10,8 +10,7 @@
 ##MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##GNU General Public License for more details.
 
-import db
-import geocoder
+from hood import db, geocoder
 
 database = db.DB()
 

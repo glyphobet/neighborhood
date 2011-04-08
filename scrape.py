@@ -17,9 +17,9 @@ import urllib
 import time
 from RSS import ns, CollectionChannel, TrackingChannel
 
-import db
-import geocoder
-from config import config
+from hood import db, geocoder
+from hood.config import config
+
 
 def log(message):
     print message

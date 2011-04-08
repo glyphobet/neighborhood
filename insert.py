@@ -10,9 +10,9 @@
 ##MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##GNU General Public License for more details.
 
-import db
 import sys
-import geocoder
+
+from hood import import db, geocoder
 print 'caution!'
 #sys.exit()
 test = False

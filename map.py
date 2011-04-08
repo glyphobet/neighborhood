@@ -16,11 +16,12 @@ from __future__ import division
 import os
 import time
 import Image
-
-import db
-from config import config, maps
-from render import mapDraw, render_init
 import ImageEnhance
+
+from hood import db
+from hood.config import config, maps
+from hood.render import mapDraw, render_init
+
 
 max_image_dimension = 2**10 #9 * 3
 

@@ -21,9 +21,9 @@ app_root = '/home/matt/neighborhood/'
 import sys
 sys.path.append( app_root )
 
-import geocoder
-import db
-from config import config
+from hood import geocoder, db
+from hood.config import config
+
 
 keys = ('loc', 'hood', 'newhood')
 
