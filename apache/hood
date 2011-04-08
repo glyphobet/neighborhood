@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+    ServerName      "hood.theory.org"
+    DocumentRoot    /var/www/theory.org/hood/html
+    CustomLog       /var/www/theory.org/hood/log/access.log combined
+    ErrorLog        /var/www/theory.org/hood/log/error.log
+
+    <Directory "/var/www/theory.org/hood/html">
+        Order allow,deny
+        allow from all
+
+        Options SymLinksIfOwnerMatch
+        AllowOverride None
+
+        AddHandler python-program .py
+        PythonHandler web
+        PythonDebug On
+    </Directory>
+</VirtualHost>
+<VirtualHost *:80>
+    ServerName www.hood.theory.org
+    RedirectPermanent / http://hood.theory.org/
+</VirtualHost>
