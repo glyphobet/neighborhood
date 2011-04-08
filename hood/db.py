@@ -11,18 +11,16 @@
 ##GNU General Public License for more details.
 
 from psycopg2 import psycopg1 as psycopg
-from config import config
+
 
 class DB(object):
 
-    conn = None
-    host = config['db_host']
-    db   = config['db_name']
-    user = config['db_user']
-    pwd  = config['db_pass']
-
-
-    def __init__(self):
+    def __init__(self, config):
+        self.conn = None
+        self.host = config['db_host']
+        self.db   = config['db_name']
+        self.user = config['db_user']
+        self.pwd  = config['db_pass']
         self.open_db()
 
 

@@ -56,7 +56,7 @@ colors.pop(0) # get rid of white
 # use light colors before dark ones
 colors.sort( lambda a,b: cmp(sum(b[:3]), sum(a[:3]))) 
 
-database = db.DB()
+database = db.DB(config)
 hoods  = database.get_neighborhoods()
 
 hood_colors = {}

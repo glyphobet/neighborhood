@@ -13,12 +13,15 @@
 import sys
 
 from hood import import db, geocoder
+from hood.config import config
+
+
 print 'caution!'
 #sys.exit()
 test = False
 
 if not test:
-    database = db.DB()
+    database = db.DB(config)
 
 while 1:
     try:

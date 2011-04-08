@@ -190,13 +190,13 @@ def make_page(req, database, data, status, errors):
         'citystate':config['citystate'],
         }
 
-    
+
 
 def handler(req):
     req.send_http_header()
 
     try:
-        database = db.DB()
+        database = db.DB(config)
         data, status, errors = add_location(req, database)
         page = make_page(req, database, data, status, errors)
         database.close_db()

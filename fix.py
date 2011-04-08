@@ -11,8 +11,9 @@
 ##GNU General Public License for more details.
 
 from hood import db, geocoder
+from hood.config import config
 
-database = db.DB()
+database = db.DB(config)
 
 fixable_rows = database.get_fixable()
 

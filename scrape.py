@@ -38,7 +38,7 @@ def scrape_HTML(base_url, page=''):
         return
     html_pages.append(html_url)
     
-    database = db.DB()
+    database = db.DB(config)
 
     sock = urllib.urlopen(html_url)
     htmlSource = sock.read()
@@ -83,7 +83,7 @@ tc = TrackingChannel()
 
 
 def scrape_RSS(rss_url):
-    database = db.DB()
+    database = db.DB(config)
     tc.parse(rss_url)
 
     hood_pat = re.compile('\(([^)]+)\)\s+\$\d+')
