@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-RSS.py by Mark Nottingham <mnot@pobox.com>
+RSS.py
 
 Classes for working with RSS channels as arbitrary data structures.
 Requires Python 2.2 or newer and PyXML 0.7.1 or newer.
@@ -58,19 +58,40 @@ TODO:
   - pay attention to <rss:items> when appropriate.
 """
 
-# THIS SOFTWARE IS SUPPLIED WITHOUT WARRANTY OF ANY KIND, AND MAY BE
-# COPIED, MODIFIED OR DISTRIBUTED IN ANY WAY, AS LONG AS THIS NOTICE
-# AND ACKNOWLEDGEMENT OF AUTHORSHIP REMAIN.
+__license__ = """
+Copyright (c) 2004-2010 Mark Nottingham <mnot@pobox.com>
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-import UserDict, sys, codecs, sha, types, signal
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
+__version__ = "0.48"
+
+import UserDict, sys, codecs, hashlib, types, signal
 import xml.sax as sax
 import xml.sax.saxutils as saxutils
 import cPickle as pickle
 import cStringIO as StringIO
+try: # accommodate older versions of python.
+	from xml.sax.sax2exts import make_parser
+except ImportError:
+	from xml.sax import make_parser
 
-
-__version__ = "0.45"
 versionURI = 'http://www.mnot.net/python/RSS.py?version=%s' % __version__
 
 
@@ -204,7 +225,7 @@ class ChannelBase:
         the channel.
         """
         dh = RSSParser(self)
-        p = sax.make_parser()
+        p = make_parser()
         p.setContentHandler(dh)
         p.setFeature(sax.handler.feature_namespaces, 1)
         signal.signal(signal.SIGALRM, self._timeout)
@@ -221,10 +242,10 @@ class ChannelBase:
     def parseFile(self, file):
         """Parse a file and populate the channel."""
         dh = RSSParser(self)
-        p = sax.make_parser()
+        p = make_parser()
         p.setContentHandler(dh)
         p.setFeature(sax.handler.feature_namespaces, 1)
-        p.parse(file)
+        p.parseFile(file)
         return dh
 
     def __str__(self):
@@ -619,7 +640,7 @@ class RSSParser(sax.handler.ContentHandler):
 
 
 def _make_hash(data):
-    return "hash-data:SHA:" + sha.new(pickle.dumps(data)).hexdigest()[:20]
+    return "hash-data:SHA:" + hashlib.sha1(pickle.dumps(data)).hexdigest()[:20]
 
 
 if __name__ == "__main__":
