@@ -141,7 +141,7 @@ def _scrape_posting(database, hood, url):
     citystate = config['citystate']
     latitude, longitude = None, None
     if loc:
-        latitude, longitude = geocoder.geocode(loc + citystate)
+        latitude, longitude = geocoder.geocode(loc, citystate=citystate)
     if test: print latitude, longitude
 
     if not test:
