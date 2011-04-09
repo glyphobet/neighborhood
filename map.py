@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 ## hood - collective neighborhood opinion map generator
 ##Copyright (C) 2005 Matt Chisholm & Ross Cohen
 
@@ -157,6 +157,9 @@ for h, hood in enumerate(hoods):
     print "%4d points, " % len(points), 
     before = time.time()
 
+    if average == (None, None):
+        print "Skipping hood with no average:", hood
+        continue
     hood_averages[hood] = average
 
     if len(points):
@@ -203,6 +206,8 @@ final = Image.composite(all_image, background, final_alpha)
 draw = mapDraw(final)
 
 for h, hood in enumerate(hoods):
+        if hood not in hood_averages:
+            continue
         average = hood_averages[hood]
 
         # draw labels
