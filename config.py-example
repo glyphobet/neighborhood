@@ -99,6 +99,7 @@ config = {
                            )),
     'neighborhood_blacklist': ('south lake tahoe',
                                'sf',
+                               'sf bay area',
                                'san francisco',
                                'mendocino coast',
                                'bay area',
