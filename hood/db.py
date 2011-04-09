@@ -84,7 +84,7 @@ class DB(object):
         long <= -122.36 AND long >= -122.52
         ;
         """
-        
+
         hoods = self.get(select_hood+where, {'hood':hood})
         stats = self.get(select_stat+where, {'hood':hood})[0]
 
