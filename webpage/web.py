@@ -130,7 +130,7 @@ def add_location(req, database):
         errors.extend(arg_errors)
 
         if not errors:
-            latitude, longitude = geocoder.geocode(data['loc'], delay=1)
+            latitude, longitude = geocoder.geocode(data['loc'], delay=16)
             if latitude != None and longitude != None:
                 host = req.get_remote_host(apache.REMOTE_NOLOOKUP)
 

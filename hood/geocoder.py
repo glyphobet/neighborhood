@@ -31,7 +31,7 @@ broken_loc_pat2 = re.compile('(\w+)\.,?\s+and')
 and_split_pat = re.compile('(?:\s+and\s+)|(?:\s*(?:&|/)\s*)')
 
 
-def geocode(loc, citystate=None, delay=10):
+def geocode(loc, citystate=None, delay=16):
     global _config
     if citystate is None:
         citystate = _config['citystate']
