@@ -69,6 +69,7 @@ def scrape_HTML(base_url, page=''):
         if test: print hood
 
         _scrape_posting(database, hood, url)
+        time.sleep(15)
 
         if test: print
 
@@ -121,6 +122,7 @@ def scrape_RSS(rss_url):
         if test: print hood
 
         _scrape_posting(database, hood, url)
+        time.sleep(15)
 
         if test: print 
     database.close_db()
