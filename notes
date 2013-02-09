@@ -1,7 +1,8 @@
 # how to create a new db
-createuser -S -D -R -P hood
-createdb -E UNICODE -O hood hood
-createlang plpgsql hoodtest
+sudo su - postgres
+createuser -h localhost -S -D -R -P hood
+createdb -h localhost -E UNICODE -O hood hood
+# createlang -h localhost plpgsql hood
 psql hood hood < schema/schema.sql
 psql hood hood < schema/trigger.sql
 
@@ -14,7 +15,9 @@ pg_dump -s -U hood -Fp -f schema/schema.sql hood
 # how to export the data to CSV, in psql
 \copy tablename TO tablename.csv WITH CSV HEADER
 
-# how to create a new db and restore from the master db
-dropdb hood
-createdb -E UNICODE -O hood hood
-pg_restore -d hood neighborhood.pgdmp
+# how to create a new db
+dropdb -h localhosthood
+createdb -h localhost -E UNICODE -O hood hood
+
+# how to restore from a database dump
+pg_restore -h localhost -d hood neighborhood.pgdmp
