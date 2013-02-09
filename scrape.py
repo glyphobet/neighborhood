@@ -17,6 +17,8 @@ import urllib
 import time
 from RSS import ns, CollectionChannel, TrackingChannel
 
+from xmlrpclib import ProtocolError
+
 from hood import db, geocoder
 from config import config
 
@@ -141,7 +143,12 @@ def _scrape_posting(database, hood, url):
     citystate = config['citystate']
     latitude, longitude = None, None
     if loc:
-        latitude, longitude = geocoder.geocode(loc, citystate=citystate)
+        try:
+            latitude, longitude = geocoder.geocode(loc, citystate=citystate)
+        except ProtocolError, exc:
+            log("error geocoding %r: %r" %(url, exc))
+            return
+
     if test: print latitude, longitude
 
     if not test:
