@@ -21,6 +21,8 @@ app_root = '/home/matt/neighborhood/'
 import sys
 sys.path.append( app_root )
 
+from xmlrpclib import ProtocolError
+
 from hood import geocoder, db
 from config import config
 
@@ -130,7 +132,11 @@ def add_location(req, database):
         errors.extend(arg_errors)
 
         if not errors:
-            latitude, longitude = geocoder.geocode(data['loc'], delay=16)
+            try:
+                latitude, longitude = geocoder.geocode(data['loc'], delay=16)
+            except ProtocolError, exc:
+                return data, status, [str(exc)]
+
             if latitude != None and longitude != None:
                 host = req.get_remote_host(apache.REMOTE_NOLOOKUP)
 
