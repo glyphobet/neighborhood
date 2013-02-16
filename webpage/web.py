@@ -201,6 +201,7 @@ def make_page(req, database, data, status, errors):
 
 
 def handler(req):
+    req.content_type = 'text/html'
     req.send_http_header()
 
     try:
@@ -208,8 +209,10 @@ def handler(req):
         data, status, errors = add_location(req, database)
         page = make_page(req, database, data, status, errors)
         database.close_db()
-        req.content_type = 'text/html'
-        req.write(page)
+        try:
+            req.write(page)
+        except IOError:
+            pass
     except:
         fake_file = StringIO.StringIO()
         traceback.print_exc(file=fake_file)
@@ -224,7 +227,6 @@ def handler(req):
         except smtplib.SMTPException:
             pass
 
-        req.content_type = 'text/plain'
         req.write(error_str)
 
     return apache.OK
