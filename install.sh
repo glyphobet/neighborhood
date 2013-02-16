@@ -1,5 +1,5 @@
 #! /bin/bash
-# This script installs dependencies inside the virtualenv, node_modules, and web directory
+# This script installs dependencies inside the virtualenv
 
 # Python stuff
 if [ ${VIRTUAL_ENV} ] ; then
