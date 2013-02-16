@@ -23,10 +23,15 @@ from hood import db, geocoder
 from config import config
 
 
+from daemon import Daemon
+
+
 geocoder.init(config)
 
 def log(message):
-    print message
+    with open(config['logfile'], 'a') as log:
+        log.write(message)
+        log.write("\n")
 
 
 test = False
@@ -169,13 +174,29 @@ def _scrape_posting(database, hood, url):
             database.insert_location(values)
 
 
+class ScrapeDaemon(Daemon):
+    def run(self):
+        while self.daemon_alive:
+            scrape_RSS(config['rss_url'])
+            #scrape_HTML(config['html_url'])
+            time.sleep(5)
 
-# main
-try:
-    scrape_RSS(config['rss_url'])
-    #scrape_HTML(config['html_url'])
-except KeyboardInterrupt:
-    sys.exit(0)
-except Exception, e:
-    log(e)
-    sys.exit(1)
+
+if __name__ == '__main__':
+    cmd = 'run'
+    if len(sys.argv) >= 2:
+        cmd = sys.argv[1]
+    scraper = ScrapeDaemon(config.get('pidfile', '/var/run/neigborhood_scraper.pid'))
+    if cmd == 'run':
+        try:
+            scraper.run()
+        except KeyboardInterrupt:
+            pass
+    elif cmd == 'start':
+        scraper.start()
+    elif cmd == 'stop':
+        scraper.stop()
+    elif cmd == 'restart':
+        scraper.restart()
+    else:
+        raise SystemExit('Unknown command "{}"'.format(cmd))

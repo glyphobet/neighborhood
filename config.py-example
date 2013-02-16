@@ -30,6 +30,9 @@ config = {
     'map_path' : 'maps/sf',
     'default_map' : 'tiger/line',
 
+    'pidfile' : '/home/matt/neighborhood_scraper.pid',
+    'logfile' : '/home/matt/neighborhood_scraper.log',
+
     'output_name' : 'map',
     'output_format' : 'png',
     'thumb_size' : 300,
