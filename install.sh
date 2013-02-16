@@ -3,7 +3,7 @@
 
 # Python stuff
 if [ ${VIRTUAL_ENV} ] ; then
-    PY_VERSION=`python -c "import sys; print('%s.%s' % (sys.version_info.major, sys.version_info.minor))"`
+    PY_VERSION=`python -c "import sys; print('%s.%s' % (sys.version_info[0], sys.version_info[1]))"`
 
     # Install python dependencies
     pip install -r requirements.txt
