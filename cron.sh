@@ -1,7 +1,7 @@
 #!/bin/sh
-cd /home/matt/neighborhood/
+cd /var/www/theory.org/hood/neighborhood/
 cp map.log map.log.old
-nice /home/matt/.virtualenvs/neighborhoodenv/bin/python map.py | grep neighborhood > map.log
+nice /var/www/theory.org/hood/neighborhood-venv/bin/python map.py | grep neighborhood > map.log
 
 if [ "x`diff map.log map.log.old`" != "x" ]; then 
     echo 'map.py found some new points today.'; 
@@ -10,5 +10,5 @@ else
     cat map.log;
 fi
 
-/home/matt/.virtualenvs/neighborhoodenv/bin/python scrape.py start
+/var/www/theory.org/hood/neighborhood-venv/bin/python scrape.py start
 
