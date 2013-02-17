@@ -21,3 +21,8 @@ createdb -h localhost -E UNICODE -O hood hood
 
 # how to restore from a database dump
 pg_restore -h localhost -d hood neighborhood.pgdmp
+
+Before installing PIP on Ubuntu 12.04, you'll need to do one of these so that PIL can find the lib:
+
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+    sudo ln -s /usr/lib/i386-linux-gnu/libz.so /usr/lib
