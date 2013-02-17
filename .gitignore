@@ -1,3 +1,5 @@
 *.pyc
 *~
 config.py
+map.log*
+map*png
