@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 ## hood - collective neighborhood opinion map generator
 ##Copyright (C) 2005 Matt Chisholm & Ross Cohen
 
