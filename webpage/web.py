@@ -15,7 +15,10 @@ import StringIO
 import smtplib
 from mod_python import apache
 
-app_root = '/home/matt/neighborhood/'
+activate_this = '/var/www/theory.org/hood/neighborhood-venv/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
+
+app_root = '/var/www/theory.org/hood/neighborhood/'
 
 import sys
 sys.path.append( app_root )
