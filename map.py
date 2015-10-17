@@ -84,51 +84,8 @@ def show(image):
     os.system('%s %s' % (config['viewer'], tmp_name))
 
 
-class Map(object):
-    def __init__(self):
-        self.lngbound = (-122.51125,  #left
-                         -122.376138,)# right
-        self.latbound = (37.707, #bottom
-                         37.809, #top
-                         # 37.826293 #top including yerba buena island
-                         )
-        self.image_size = None
+class LinearProjector(object):
 
-        self.lngrng = (self.lngbound[1] - self.lngbound[0])
-        self.latrng = (self.latbound[1] - self.latbound[0])
-
-        if self.lngrng > self.latrng:
-            # landscape
-            height = int(round(max_image_dimension * ( self.latrng / self.lngrng )))
-            self.image_size = (max_image_dimension, height)
-        else:
-            # portrait
-            width = int(round(max_image_dimension * ( self.latrng / self.lngrng )))
-            self.image_size = (width, max_image_dimension)
-
-            print('aspect ratio:', self.image_size[0]/self.image_size[1])
-
-        self.background = Image.new('RGBA', self.image_size, (0xef,)*3 + (0xff,))
-        return self
-
-
-    def to_image(self, lng, lat):
-        #print 'pt', lng, lat
-
-        lngpos = (self.lngbound[1] - lng)
-        latpos = (self.latbound[1] - lat)
-        #print 'pos', lngpos, latpos
-
-        lngpct = lngpos / self.lngrng
-        latpct = latpos / self.latrng
-        #print 'pct', lngpct, latpct
-
-        x = self.image_size[0] - (lngpct * self.image_size[0])
-        y = latpct * self.image_size[1]
-        return (x,y)
-
-
-class NoBackgroundMap(Map):
     def __init__(self):
         self.image_size = (1845, 1845)
 
@@ -146,11 +103,28 @@ class NoBackgroundMap(Map):
         self.latrng = northMaxLat - southMinLat
 
 
+    def to_image(self, lng, lat):
+        """"Linearly project a (longitude, latitude) coordinate to an image (x,y) coordinate."""
+        #print 'pt', lng, lat
+
+        lngpos = (self.lngbound[1] - lng)
+        latpos = (self.latbound[1] - lat)
+        #print 'pos', lngpos, latpos
+
+        lngpct = lngpos / self.lngrng
+        latpct = latpos / self.latrng
+        #print 'pct', lngpct, latpct
+
+        x = self.image_size[0] - (lngpct * self.image_size[0])
+        y = latpct * self.image_size[1]
+        return (x,y)
+
+
 total_points = 0
 start = time.time()
 
 render_init(config)
-m = NoBackgroundMap()
+m = LinearProjector()
 
 hood_averages = {}
 
