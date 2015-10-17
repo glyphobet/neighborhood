@@ -31,13 +31,14 @@
 
         map.setMaxBounds(new L.LatLngBounds([southMinLat, westMaxLong], [northMaxLat, eastMinLong]));
 
-        var box = L.polygon([
-          [southMinLat, westMaxLong], // SW
-          [northMaxLat, westMaxLong], // NW
-          [northMaxLat, eastMinLong], // NE
-          [southMinLat, eastMinLong], // SE
-        ]).addTo(map);
-        box.setStyle({fill: false, weight: 1});
+        // For debugging:
+        // var box = L.polygon([
+        //   [southMinLat, westMaxLong], // SW
+        //   [northMaxLat, westMaxLong], // NW
+        //   [northMaxLat, eastMinLong], // NE
+        //   [southMinLat, eastMinLong], // SE
+        // ]).addTo(map);
+        // box.setStyle({fill: false, weight: 1});
 
         // From: http://wiki.openstreetmap.org/wiki/Tiles
         // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { // default
