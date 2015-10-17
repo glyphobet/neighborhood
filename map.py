@@ -12,7 +12,7 @@
 ##MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##GNU General Public License for more details.
 
-from __future__ import division
+from __future__ import division, print_function
 import os
 import time
 import Image
@@ -106,7 +106,7 @@ class Map(object):
             width = int(round(max_image_dimension * ( self.latrng / self.lngrng )))
             self.image_size = (width, max_image_dimension)
 
-            print 'aspect ratio:', self.image_size[0]/self.image_size[1]
+            print('aspect ratio:', self.image_size[0]/self.image_size[1])
 
         self.background = Image.new('RGBA', self.image_size, (0xef,)*3 + (0xff,))
         return self
@@ -157,13 +157,14 @@ hood_averages = {}
 # draw light colors *after* dark colors
 all_image = Image.new('RGBA', m.image_size, (0xff, 0xff, 0xff, 0x00))
 for h, hood in enumerate(hoods):
-    print "Mapping \"%s\"\t" % (hood,),
     average, stddev, points = database.get_mappable_by_hood(hood)
-    print "%4d points, " % len(points),
+
+    print("Mapping {:31s} {:4d} points, ".format('"'+hood+'",', len(points)), end='')
+
     before = time.time()
 
     if average == (None, None):
-        print "Skipping hood with no average:", hood
+        print("Skipping hood with no average:", hood)
         continue
     hood_averages[hood] = average
 
@@ -200,7 +201,7 @@ for h, hood in enumerate(hoods):
         # show(hood_image)
         total_points += len(points)
 
-    print '%0.02f seconds' % (time.time() - before)
+    print('{:0.2f} seconds'.format(time.time() - before))
 
 
 # no-hood points
@@ -222,4 +223,4 @@ label1 = '%d distinct locations in %d neighborhoods' % (total_points, len(hoods)
 label2 = '%d distinct locations in unknown neighborhoods' % len(no_hood_points)
 print(label1)
 print(label2)
-print("{} seconds total".format(time.time() - start))
+print("{:0.2f} seconds total".format(time.time() - start))
