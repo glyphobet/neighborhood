@@ -46,9 +46,9 @@ variants = (1,4/7,1/7)#,0)
 for r in variants:
     for g in variants:
         for b in variants:
-            colors.append((int(r*0xff),
-                           int(g*0xff),
-                           int(b*0xff),
+            colors.append((int(round(r*0xff)),
+                           int(round(g*0xff)),
+                           int(round(b*0xff)),
                            neighborhood_color_alpha))
 
 colors.pop(0) # get rid of white
