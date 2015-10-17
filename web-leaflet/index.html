@@ -46,6 +46,58 @@
         L.tileLayer('http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {  // very subdued w/ neighborhood names
             attribution: '&copy; Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
         }).addTo(map);
+
+        var hoods = [
+          "alamo square / nopa",
+          "bayview",
+          "bernal heights",
+          "castro / upper market",
+          "cole valley / ashbury hts",
+          "downtown / civic / van ness",
+          "excelsior / outer mission",
+          "financial district",
+          "glen park",
+          "haight ashbury",
+          "hayes valley",
+          "ingleside / SFSU / CCSF",
+          "inner richmond",
+          "inner sunset / UCSF",
+          "laurel hts / presidio",
+          "lower haight",
+          "lower nob hill",
+          "lower pac hts",
+          "marina / cow hollow",
+          "mission district",
+          "nob hill",
+          "noe valley",
+          "north beach / telegraph hill",
+          "pacific heights",
+          "portola district",
+          "potrero hill",
+          "richmond / seacliff",
+          "russian hill",
+          "SOMA / south beach",
+          "sunset / parkside",
+          "Sunset District",
+          "tenderloin",
+          "Treasure Island",
+          "twin peaks / diamond hts",
+          "USF / panhandle",
+          "visitacion valley",
+          "west portal / forest hill",
+          "western addition",
+        ];
+
+        var overlays = {};
+
+        for (var h in hoods) {
+          var hood = hoods[h];
+          var overlay = L.imageOverlay('hoods/'+hood.replace(/\//g, '-')+'.png', [[southMinLat, westMaxLong], [northMaxLat, eastMinLong]], {'opacity': 0.75}).addTo(map);
+          overlays[hood] = overlay;
+        }
+        var overlay = L.imageOverlay('hoods/no hood.png', [[southMinLat, westMaxLong], [northMaxLat, eastMinLong]], {'opacity':0.75}).addTo(map);
+        overlays['No Neighborhood'] = overlay;
+        L.control.layers({}, overlays).addTo(map);
       }
     </script>
   </head>
