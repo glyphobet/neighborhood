@@ -130,12 +130,12 @@ class Map(object):
 
 class NoBackgroundMap(Map):
     def __init__(self):
-        self.image_size = (1842, 1900)
+        self.image_size = (1845, 1900)
 
         southMinLat = 37.70415  # ymin
         northMaxLat = 37.83301  # ymax
         westMaxLong = -122.51528  # xmin
-        eastMinLong = -122.35728  # xmax
+        eastMinLong = -122.35702  # xmax
 
         self.background = Image.new('RGBA', self.image_size, (0xff, 0xff, 0xff, 0x00))
 
