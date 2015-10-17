@@ -20,7 +20,7 @@ import ImageFont
 
 from hood import db
 from hood.render import mapDraw, render_init
-from config import config, maps
+from config import config
 
 
 max_image_dimension = 2**10 #9 * 3

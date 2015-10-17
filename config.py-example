@@ -10,8 +10,9 @@
 ##MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##GNU General Public License for more details.
 
-blob_radius = 6.0
-blob_adj    = 0.95
+overall_scale = 1.09
+blob_radius = 6.0 * overall_scale
+blob_adj    = 0.95 * overall_scale
 
 config = {
     'db_host' : 'localhost'   ,
@@ -27,30 +28,25 @@ config = {
     'rss_url'  : 'http://www.craigslist.org/sfc/hhh/index.rss',
     'html_url' : 'http://www.craigslist.org/sfc/hhh/',
 
-    'map_path' : 'maps/sf',
-    'default_map' : 'tiger/line',
+    'pidfile' : '/Users/matt/neighborhood_scraper.pid',
+    'logfile' : '/Users/matt/neighborhood_scraper.log',
 
-    'pidfile' : '/home/matt/neighborhood_scraper.pid',
-    'logfile' : '/home/matt/neighborhood_scraper.log',
-
-    'output_name' : 'map',
     'output_format' : 'png',
-    'thumb_size' : 300,
 
     # rendering knobs
-    'point_radius'    : 4,
+    'point_radius'    : int(round(4 * overall_scale)),
     'blob_radius'     : blob_radius,
-    'blob_outer'      : blob_radius + 0.4,     # for antialiasing
-    'blob_influence'  : int(blob_radius * 3.5),
+    'blob_outer'      : blob_radius + 0.4 * overall_scale,     # for antialiasing
+    'blob_influence'  : int(round(blob_radius * 3.5 * overall_scale)),
 
     # receding blobs stuff
     'receding_blobs'  : True,
     'blob_adj'        : blob_adj,
-    'blob_scale'      : 0.7 / blob_adj,
+    'blob_scale'      : 0.7 * overall_scale / blob_adj,
 
     'draw_stddev'     : False,
 
-    'viewer'     : 'eog',
+    'viewer'     : 'open',  # Mac OS X, try 'eog' on Linux
     'show_image' : True,
 
     'neighborhoods' : set(('mission district',
@@ -118,21 +114,3 @@ config = {
     }
 
 config['citystate'] = ', '+config['city']+' '+config['state']
-
-maps = {
-    #http://tiger.census.gov/cgi-bin/mapper/map.gif?&lat=37.75745&lon=-122.43528&ht=0.064&wid=0.160&&tlevel=-&tvar=-&tmeth=i&mlat=&mlon=&msym=bigdot&mlabel=&murl=&conf=mapnew.con&iht=1436&iwd=1688
-    'tiger/line': {'xmin' : -122.51528, # left
-                   'xmax' : -122.35728, # right
-                   #ydelta = 0.0533 
-                   'ymin' :   37.70415, #37.75745 - ydelta # bottom 
-                   'ymax' :   37.81075, #37.75745 + ydelta # top
-                   'filename' : 'tiger_line.png',
-                   
-                   },
-    'sfmap'     : {'xmin' : -122.511475 + - 0.0045, #left
-                   'xmax' : -122.38144  +   0.003,  #right
-                   'ymin' :   37.708333333333336 - 0.0145, # bottom
-                   'ymax' :   37.808728  + 0.0151, #top
-                   'filename' : 'mapsf.png',
-                   },
-    }
