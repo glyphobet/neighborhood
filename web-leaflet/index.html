@@ -94,7 +94,9 @@
         for (var h in hoods) {
           var hood = hoods[h];
           var overlay = L.imageOverlay('hoods/'+hood.replace(/\//g, '-')+'.png', [[southMinLat, westMaxLong], [northMaxLat, eastMinLong]], {'opacity': 0.75}).addTo(map);
-          overlays[hood] = overlay;
+          overlays[
+            hood.replace(' hts', ' heights').replace(/\w\S{1,}[a-z]/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+          ] = overlay;
         }
         var overlay = L.imageOverlay('hoods/no hood.png', [[southMinLat, westMaxLong], [northMaxLat, eastMinLong]], {'opacity':0.75}).addTo(map);
         overlays['No Neighborhood'] = overlay;

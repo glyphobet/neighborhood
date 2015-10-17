@@ -182,6 +182,7 @@ for h, hood in enumerate(hoods):
         center = m.to_image(*average)
         font = ImageFont.truetype('/Library/Fonts/Futura.ttc', 18)
         for label in labels:
+            label = ' '.join(map(lambda w: w.title() if w.islower() else w, label.replace(' hts', ' heights').split(' ')))
             size = draw.textsize(label, font=font)
             offset = size[0]/2, size[1]/2
             position = center[0] - offset[0], center[1] - offset[1]
