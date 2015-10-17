@@ -16,7 +16,7 @@ from __future__ import division, print_function
 import os
 import time
 import Image
-import ImageEnhance
+import ImageFont
 
 from hood import db
 from hood.render import mapDraw, render_init
@@ -180,11 +180,12 @@ for h, hood in enumerate(hoods):
         # draw labels
         labels = hood.split(' / ')
         center = m.to_image(*average)
+        font = ImageFont.truetype('/Library/Fonts/Futura.ttc', 18)
         for label in labels:
-            size = draw.textsize(label)
+            size = draw.textsize(label, font=font)
             offset = size[0]/2, size[1]/2
             position = center[0] - offset[0], center[1] - offset[1]
-            draw.text(position, label, fill=(0,0,0,0xff))
+            draw.text(position, label, fill=(0,0,0,0xff), font=font)
             center = (center[0], center[1] + size[1])
 
         if config['draw_stddev']:
