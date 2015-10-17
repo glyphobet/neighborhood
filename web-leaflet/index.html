@@ -100,7 +100,7 @@
         }
         var overlay = L.imageOverlay('hoods/no hood.png', [[southMinLat, westMaxLong], [northMaxLat, eastMinLong]], {'opacity':0.75}).addTo(map);
         overlays['No Neighborhood'] = overlay;
-        L.control.layers({}, overlays).addTo(map);
+        L.control.layers({}, overlays, {collapsed: false}).addTo(map);
       }
     </script>
   </head>
