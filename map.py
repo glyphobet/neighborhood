@@ -206,12 +206,10 @@ for h, hood in enumerate(hoods):
     print('{:0.2f} seconds'.format(time.time() - before))
 
 
-# no-hood points
+# draw no-neighborhood locations with circles on background
 no_hood_image = Image.new('RGBA', m.image_size, (0xff, 0xff, 0xff, 0x00))
 draw = mapDraw(no_hood_image)
-
 no_hood_points = database.get_mappable_no_hood(None)
-# draw no-neighborhood locations with circles on background
 for point in no_hood_points:
     coord = m.to_image(*point)
     coord = [int(round(x)) for x in coord]
