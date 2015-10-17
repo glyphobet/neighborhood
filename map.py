@@ -128,7 +128,8 @@ m = LinearProjector()
 
 hood_averages = {}
 
-# draw light colors *after* dark colors
+font = ImageFont.truetype(config['font_path'], config['font_size'])
+
 all_image = Image.new('RGBA', m.image_size, (0xff, 0xff, 0xff, 0x00))
 for h, hood in enumerate(hoods):
     average, stddev, points = database.get_mappable_by_hood(hood)
@@ -154,7 +155,6 @@ for h, hood in enumerate(hoods):
         # draw labels
         labels = hood.split(' / ')
         center = m.to_image(*average)
-        font = ImageFont.truetype('/Library/Fonts/Futura.ttc', 18)
         for label in labels:
             label = ' '.join(map(lambda w: w.title() if w.islower() else w, label.replace(' hts', ' heights').split(' ')))
             size = draw.textsize(label, font=font)
