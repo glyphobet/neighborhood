@@ -27,6 +27,8 @@ config = {
     'font_path' : '/Library/Fonts/Futura.ttc',
     'font_size' : 18,
 
+    'map_path': 'webpage/map/hoods/',
+
     'geocoder' : 'http://rpc.geocoder.us/service/xmlrpc',
     'rss_url'  : 'http://www.craigslist.org/sfc/hhh/index.rss',
     'html_url' : 'http://www.craigslist.org/sfc/hhh/',

@@ -173,7 +173,7 @@ for h, hood in enumerate(hoods):
                 #draw.rectangle(stdevbox, outline=(0,0,0,0xff))
                 draw.arc(stdevbox, 0, 360, fill=(0,0,0,0xff))
 
-        hood_image.save('web-leaflet/hoods/{}.{}'.format(hood.replace('/', '-'), config['output_format']))
+        hood_image.save('{}/{}.{}'.format(config['map_path'], hood.replace('/', '-'), config['output_format']))
         # show(hood_image)
         total_points += len(points)
 
@@ -189,7 +189,7 @@ for point in no_hood_points:
     coord = [int(round(x)) for x in coord]
     draw.circle(coord, fill=(0x00, 0x00, 0x00, 0x80))
 
-no_hood_image.save('web-leaflet/hoods/no hood.{}'.format(config['output_format']))
+no_hood_image.save('{}/no hood.{}'.format(config['map_path'], config['output_format']))
 # show(no_hood_image)
 
 
