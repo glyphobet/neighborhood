@@ -59,7 +59,9 @@
           var hood = hoods[h];
           var name = hood.name;
           var path = name.replace(/\//g, '-');
-          var label = name.replace(' hts', ' heights').replace(/\w\S{1,}[a-z]/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+          var label = name.replace(' hts', ' heights').replace(/\w\S{1,}[a-z]/g, function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          });
           var overlay = L.imageOverlay('hoods/'+path+'.png', [[southMinLat, westMaxLong], [northMaxLat, eastMinLong]], {'opacity': 1});
           overlays['<span><span class="key" style="background-color:rgba('+hood.color.toString()+');"></span>&nbsp;'+label+'</span>'] = overlay;
         }
