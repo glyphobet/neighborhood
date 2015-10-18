@@ -189,6 +189,9 @@ for h, hood in enumerate(hoods):
 no_hood_image = Image.new('RGBA', m.image_size, (0xff, 0xff, 0xff, 0x00))
 draw = mapDraw(no_hood_image)
 no_hood_points = database.get_mappable_no_hood(None)
+
+# if you want to draw no-hood as blobs
+# draw_blobs(draw, (0x00, 0x00, 0x00, 0x80), [m.to_image(*p) for p in no_hood_points])
 for point in no_hood_points:
     coord = m.to_image(*point)
     coord = [int(round(x)) for x in coord]
