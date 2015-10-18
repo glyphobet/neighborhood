@@ -12,7 +12,7 @@
 
 overall_scale = 1.09
 blob_radius = 6.0 * overall_scale
-blob_adj    = 0.95 * overall_scale
+blob_adj    = 0.95
 
 config = {
     'db_host' : 'localhost'   ,
@@ -45,9 +45,9 @@ config = {
     'blob_influence'  : int(round(blob_radius * 3.5 * overall_scale)),
 
     # receding blobs stuff
-    'receding_blobs'  : True,
+    'receding_blobs'  : False,
     'blob_adj'        : blob_adj,
-    'blob_scale'      : 0.7 * overall_scale / blob_adj,
+    'blob_scale'      : 0.7 / blob_adj,
 
     'draw_stddev'     : False,
 
