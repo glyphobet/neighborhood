@@ -58,7 +58,7 @@ for r in variants:
 colors.sort(lambda a,b: cmp(sum(b[:3]), sum(a[:3])))
 
 database = db.DB(config)
-hoods  = database.get_neighborhoods()
+hoods = database.get_neighborhoods()
 
 # chop off lightest and darkest colors if we have more colors than neighborhoods
 if len(colors) > len(hoods):
@@ -66,7 +66,7 @@ if len(colors) > len(hoods):
     colors = colors[chop:-chop]
 
 hood_colors = {}
-for i, hood in enumerate(hoods):
+for i, (hood_id, hood) in enumerate(hoods):
     hood_colors[hood] = colors[i%len(colors)]
 
 
@@ -138,8 +138,8 @@ json_out = []
 font = ImageFont.truetype(config['font_path'], config['font_size'])
 
 all_image = Image.new('RGBA', m.image_size, (0xff, 0xff, 0xff, 0x00))
-for h, hood in enumerate(hoods):
-    average, stddev, points = database.get_mappable_by_hood(hood)
+for h, (hood_id, hood) in enumerate(hoods):
+    average, stddev, points = database.get_mappable_by_hood_id(hood_id)
 
     print("Mapping {:31s} {:4d} points, ".format('"'+hood+'",', len(points)), end='')
 

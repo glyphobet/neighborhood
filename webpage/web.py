@@ -175,7 +175,7 @@ def add_location(req, database):
 def make_page(req, database, data, status, errors):
     error_str = '\n'.join(['<b>Error:</b> %s<br>'%e for e in errors])
 
-    db_hoods = database.get_neighborhoods()
+    db_hoods = [h[1] for h in database.get_neighborhoods()]
     hoods_set = config['neighborhoods'] | set(db_hoods)
     hoods = list(hoods_set)
     hoods.sort( lambda a,b: cmp(a.lower(), b.lower()))

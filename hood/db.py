@@ -56,14 +56,14 @@ class DB(object):
 
     def get_by_dict(self, d):
         select = """
-        SELECT * FROM location WHERE 
+        SELECT * FROM location WHERE
         """ + \
         ' AND '.join( self._key_tuple(d.keys()) )
 
         return self.get(select, d)
 
 
-    def get_mappable_by_hood(self, hood, distinct=True):
+    def get_mappable_by_hood_id(self, hood_id, distinct=True):
         distinct = distinct and 'DISTINCT' or ''
         select_hood = """SELECT %s long, lat FROM location """ % distinct
         select_stat = """SELECT
@@ -75,7 +75,7 @@ class DB(object):
 
         where = """
         WHERE
-        hood = %(hood)s
+        hood_id = %(hood_id)s
         AND
         long IS NOT NULL AND lat IS NOT NULL
         AND
@@ -85,8 +85,8 @@ class DB(object):
         ;
         """
 
-        hoods = self.get(select_hood+where, {'hood':hood})
-        stats = self.get(select_stat+where, {'hood':hood})[0]
+        hoods = self.get(select_hood+where, {'hood_id':hood_id})
+        stats = self.get(select_stat+where, {'hood_id':hood_id})[0]
 
         avg    = stats[0:2]
         stddev = stats[2:]
@@ -109,9 +109,9 @@ class DB(object):
 
 
     def get_neighborhoods(self):
-        select = """SELECT name FROM neighborhood ORDER BY lower(name);"""
+        select = """SELECT id, name FROM neighborhood ORDER BY lower(name);"""
         hoods = self.get(select, {})
-        return [h[0] for h in hoods]
+        return [(h[0], h[1]) for h in hoods]
 
 
     def get_by_url(self, url):
