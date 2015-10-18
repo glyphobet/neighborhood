@@ -16,7 +16,7 @@ pg_dump -s -U hood -Fp -f schema/schema.sql hood
 \copy tablename TO tablename.csv WITH CSV HEADER
 
 # how to create a new db
-dropdb -h localhosthood
+dropdb -h localhost hood
 createdb -h localhost -E UNICODE -O hood hood
 
 # how to restore from a database dump

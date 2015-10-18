@@ -3,3 +3,4 @@
 config.py
 map.log*
 map*png
+webpage/map/leaflet.*s

@@ -14,3 +14,6 @@ if [ ${VIRTUAL_ENV} ] ; then
         curl -sL https://raw.github.com/serverdensity/python-daemon/master/daemon.py > ${DAEMON_PATH}
     fi
 fi
+
+curl -s http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css -o webpage/map/leaflet.css -z webpage/map/leaflet.css
+curl -s http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js  -o webpage/map/leaflet.js  -z webpage/map/leaflet.js
