@@ -42,22 +42,27 @@ target_alpha = 0xC0
 
 
 colors = []
-variants = (1,4/7,1/7)#,0)
+variants = (7/8, 5/8, 3/8, 1/8)
 for r in variants:
     for g in variants:
         for b in variants:
+            if r == g == b:
+                continue  # skip greys
             colors.append((int(round(r*0xff)),
                            int(round(g*0xff)),
                            int(round(b*0xff)),
                            neighborhood_color_alpha))
 
-colors.pop(0) # get rid of white
-
-# use light colors before dark ones
-colors.sort( lambda a,b: cmp(sum(b[:3]), sum(a[:3])))
+# sort lighter colors before dark ones
+colors.sort(lambda a,b: cmp(sum(b[:3]), sum(a[:3])))
 
 database = db.DB(config)
 hoods  = database.get_neighborhoods()
+
+# chop off lightest and darkest colors if we have more colors than neighborhoods
+if len(colors) > len(hoods):
+    chop = int((len(colors) - len(hoods)) / 2)
+    colors = colors[chop:-chop]
 
 hood_colors = {}
 for i, hood in enumerate(hoods):
