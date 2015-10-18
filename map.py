@@ -15,6 +15,7 @@
 from __future__ import division, print_function
 import os
 import time
+import json
 import Image
 import ImageFont
 
@@ -132,6 +133,7 @@ render_init(config)
 m = LinearProjector()
 
 hood_averages = {}
+json_out = []
 
 font = ImageFont.truetype(config['font_path'], config['font_size'])
 
@@ -160,6 +162,18 @@ for h, hood in enumerate(hoods):
         # draw labels
         labels = hood.split(' / ')
         center = m.to_image(*average)
+
+        json_out.append({
+            'name': hood,
+            'color': color[:3] + (color[3]/256,),
+            'center': {
+                'x': center[0],
+                'y': center[1],
+                'lat': average[1],
+                'long': average[0],
+            }
+        })
+
         for label in labels:
             label = ' '.join(map(lambda w: w.title() if w.islower() else w, label.replace(' hts', ' heights').split(' ')))
             size = draw.textsize(label, font=font)
@@ -184,6 +198,10 @@ for h, hood in enumerate(hoods):
 
     print('{:0.2f} seconds'.format(time.time() - before))
 
+with open('{}/hoods.js'.format(config['map_path']), 'w') as json_fh:
+    json_fh.write('var hoods = ')
+    json.dump(json_out, json_fh, indent=2)
+    json_fh.write(';')
 
 # draw no-neighborhood locations with circles on background
 no_hood_image = Image.new('RGBA', m.image_size, (0xff, 0xff, 0xff, 0x00))
