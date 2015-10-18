@@ -5,142 +5,141 @@
   </head>
   <body>
     <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
-    
+
     <div style="width:600px;align:center;margin:16px;">
       <div style="text-align:center;">
-	<span style="font-weight:bold; font-size:24px;">The Neighborhood Project</span>
-	<br/>
-	<span>
-	  <small>
-	    By <a href="http://www.theory.org/~matt">Matt Chisholm</a>
-	    and <a href="http://lumberjack.snurgle.org/~rcohen">Ross Cohen</a>
-	  </small>
-	</span>
-	<br/>
-	<span>
-	  <small>
-	    <tt>matt(dash)hood(at)theory(dot)org</tt>
-	    and 
-	    <tt>rcohen(plus)hood(at)snurgle(dot)org</tt>
-	  </small>
-	</span>
+    <span style="font-weight:bold; font-size:24px;">The Neighborhood Project</span>
+    <br/>
+    <span>
+      <small>
+        By <a href="http://www.theory.org/~matt">Matt Chisholm</a>
+        and <a href="http://lumberjack.snurgle.org/~rcohen">Ross Cohen</a>
+      </small>
+    </span>
+    <br/>
+    <span>
+      <small>
+        <tt>matt(dash)hood(at)theory(dot)org</tt>
+        and
+        <tt>rcohen(plus)hood(at)snurgle(dot)org</tt>
+      </small>
+    </span>
       </div>
 
       <div style="width:600px; text-align:center; margin:16px;">
-	<a href="map.html">View the map!</a>
+    <a href="map.html">View the map!</a>
       </div>
 
       <div style="width:600px;">
-	<div style="float:right; width:300px; border: 0px; margin:10px; text-align:center;">
-	  <a href="map.html" style="border:0px;" title="when a couple 'a guys, they were upta no good, started makin' trouble in my....">
-	    <img src="map_thumb.png" height="300" width="300" border="0"/>
-	  </a>
-	  <i><small>...neighborhood.</small></i>
-	</div>
+    <div style="float:right; width:300px; border: 0px; margin:10px; text-align:center;">
+      <a href="map.html" style="border:0px;" title="when a couple 'a guys, they were upta no good, started makin' trouble in my....">
+        <img src="map_thumb.png" height="300" width="300" border="0"/>
+      </a>
+      <i><small>...neighborhood.</small></i>
+    </div>
 
-	<p>
-	  The Neighborhood Project is creating a map of city
-	  neighborhoods based on the collective opinions of internet
-	  users.  Addresses and neighborhood data are translated into
-	  latitude and longitude values, and then drawn on the map.
-	  The address and neighborhood data are collected from <a
-	  href="http://www.craigslist.org/sfc/hhh/">housing posts</a>
-	  on <a href="http://www.craigslist.org">craigslist</a>, and
-	  from people filling out the form below.  The coordinates are
-	  generated using the free <a
-	  href="http://www.geocoder.us/">geocoder.us</a>.  The map is
-	  from the <a
-	  href="http://tiger.census.gov/cgi-bin/mapsurfer?infact=2&outfact=2&act=move&tlevel=-&tvar=-&tmeth=i&mlat=&mlon=&msym=bigdot&mlabel=&murl=&lat=37.75745&lon=-122.43528&wid=0.160&ht=0.064&conf=mapnew.con">TIGER/Line</a>
-	  US Census data.  Our first city is San Francisco, but we
-	  will add more soon.  Or you can <a
-	  href="#download">download</a> the software and make your
-	  own.
-	</p>
+    <p>
+      The Neighborhood Project is creating a map of city
+      neighborhoods based on the collective opinions of internet
+      users.  Addresses and neighborhood data are translated into
+      latitude and longitude values, and then drawn on the map.
+      The address and neighborhood data are collected from <a
+      href="http://www.craigslist.org/sfc/hhh/">housing posts</a>
+      on <a href="http://www.craigslist.org">craigslist</a>, and
+      from people filling out the form below.  The coordinates are
+      generated using the free <a
+      href="http://www.geocoder.us/">geocoder.us</a>.  The map is
+      from the <a
+      href="http://tiger.census.gov/cgi-bin/mapsurfer?infact=2&outfact=2&act=move&tlevel=-&tvar=-&tmeth=i&mlat=&mlon=&msym=bigdot&mlabel=&murl=&lat=37.75745&lon=-122.43528&wid=0.160&ht=0.064&conf=mapnew.con">TIGER/Line</a>
+      US Census data.  Our first city is San Francisco, but we
+      will add more soon.  Or you can <a href="https://github.com/glyphobet/neighborhood">download</a> the software and make your
+      own.
+    </p>
 
-	<p align="justify">
-	  This is an experiment in collective knowledge.  The more
-	  people who add their opinion to the database, the more
-	  accurate the neighborhood boundaries become.  Plese add your
-	  location below! 
-	</p>
+    <p align="justify">
+      This is an experiment in collective knowledge.  The more
+      people who add their opinion to the database, the more
+      accurate the neighborhood boundaries become.  Plese add your
+      location below!
+    </p>
 
-	<iframe style="width:800px; height:100px; clear:both;" src="web.py" frameborder="no" scrolling="no">
-	</iframe>
+    <iframe style="width:800px; height:100px; clear:both;" src="web.py" frameborder="no" scrolling="no">
+    </iframe>
 
-	<p>
-	  The map is updated every night. We plan to make the data
-	  we've collected available, once we get a little bit better
-	  at working with PostgreSQL.
-	</p>
+    <p>
+      The map is updated every night. We plan to make the data
+      we've collected available, once we get a little bit better
+      at working with PostgreSQL.
+    </p>
 
-	<p>
-	  The algorithm for drawing neighborhoods is the "blobby"
-	  algorithm, well known in computer graphics.  You can think
-	  of each point in a neighborhood as a little magnet, and the
-	  neighborhood is the region where the combined attraction of
-	  all those magnets is above a certain strength.  A single
-	  point makes a small circle on the map.  The influence of a
-	  number of nearby points will combine to make a curved blob. 
-	  Read more about blobbies:
-	<ul>
-	  <li>
-	    <a href="http://astronomy.swin.edu.au/~pbourke/modelling/implicitsurf/">Implicit Surfaces</a> 
-	  </li>
-	  <li>
-	    <a href="http://www.geisswerks.com/ryan/BLOBS/blobs.html">Metaballs</a>
-	  </li>
-	  <li>
-	    <a href="http://www.siggraph.org/education/materials/HyperGraph/modeling/metaballs/metaballs_mward.html">An Overview of Metaballs/Blobby Objects</a>
-	  </li>
-	</ul>
-	</p>
+    <p>
+      The algorithm for drawing neighborhoods is the "blobby"
+      algorithm, well known in computer graphics.  You can think
+      of each point in a neighborhood as a little magnet, and the
+      neighborhood is the region where the combined attraction of
+      all those magnets is above a certain strength.  A single
+      point makes a small circle on the map.  The influence of a
+      number of nearby points will combine to make a curved blob.
+      Read more about blobbies:
+    <ul>
+      <li>
+        <a href="http://astronomy.swin.edu.au/~pbourke/modelling/implicitsurf/">Implicit Surfaces</a>
+      </li>
+      <li>
+        <a href="http://www.geisswerks.com/ryan/BLOBS/blobs.html">Metaballs</a>
+      </li>
+      <li>
+        <a href="http://www.siggraph.org/education/materials/HyperGraph/modeling/metaballs/metaballs_mward.html">An Overview of Metaballs/Blobby Objects</a>
+      </li>
+    </ul>
+    </p>
 
-	<p>
-	  To prevent duplicate postings or submissions from combining
-	  to form larger and larger circles, the program discards
-	  duplicate entries when it draws the map.
-	</p>
+    <p>
+      To prevent duplicate postings or submissions from combining
+      to form larger and larger circles, the program discards
+      duplicate entries when it draws the map.
+    </p>
 
-	<p>
-	  There are two problems with the way the map is being drawn
-	  currently:
-	  <ul>
-	    <li>
-	      Multiple entries that are very close together combine to
-	      form large blobs.  We are experimenting with an
-	      algorithm which reduces the individual contribution of
-	      points as the number of points in that immediate region
-	      increases.  
-	    </li> 
-	    <li>
-	      There are a small number of posts that are very far
-	      outside the neighborhood that they claim to be in.
-	      (Currently there appears to be an Inner Sunset and a
-	      Marina post in SOMA, and a SOMA post in Potrero Hill, a
-	      USF/Panhandle post in the Sunset, and so on.)  We may
-	      develop an algorithm that discards data points that are
-	      very divergent from the average or standard deviation
-	      for that neighborhood.
-	    </li>
-	  </ul>
-	</p>
+    <p>
+      There are two problems with the way the map is being drawn
+      currently:
+      <ul>
+        <li>
+          Multiple entries that are very close together combine to
+          form large blobs.  We are experimenting with an
+          algorithm which reduces the individual contribution of
+          points as the number of points in that immediate region
+          increases.
+        </li>
+        <li>
+          There are a small number of posts that are very far
+          outside the neighborhood that they claim to be in.
+          (Currently there appears to be an Inner Sunset and a
+          Marina post in SOMA, and a SOMA post in Potrero Hill, a
+          USF/Panhandle post in the Sunset, and so on.)  We may
+          develop an algorithm that discards data points that are
+          very divergent from the average or standard deviation
+          for that neighborhood.
+        </li>
+      </ul>
+    </p>
 
-	<p>
-	  Thanks to Jeremy Avnet, Jonathan Moore, Amber Clisura, <a
-	  href="http://theory.org">theory.org</a> and <a
-	  href="http://mosuki.com">mosuki.com</a> for inspiration and
-	  support.
-	</p>
+    <p>
+      Thanks to Jeremy Avnet, Jonathan Moore, Amber Clisura, <a
+      href="http://theory.org">theory.org</a> and <a
+      href="http://mosuki.com">mosuki.com</a> for inspiration and
+      support.
+    </p>
 
-	<p><a name="download"></a>
-	  The software to create these maps is available on <a href="https://github.com/glyphobet/neighborhood">GitHub</a>.
-	  It is licensed under the <a
-	  href="http://www.gnu.org/copyleft/gpl.html">GNU GPL.</a> It
-	  is written in <a href="http://www.python.org">Python</a> and
-	  uses the <a href="http://www.postgresql.org">PostgreSQL
-	  database.</a> It's also hella beta so be afraid, be very afraid.
-	</p>
-		
+    <p><a name="download"></a>
+      The software to create these maps is available on <a href="https://github.com/glyphobet/neighborhood">GitHub</a>.
+      It is licensed under the <a
+      href="http://www.gnu.org/copyleft/gpl.html">GNU GPL.</a> It
+      is written in <a href="http://www.python.org">Python</a> and
+      uses the <a href="http://www.postgresql.org">PostgreSQL
+      database.</a> It's also hella beta so be afraid, be very afraid.
+    </p>
+
       </div>
 
     </div>
