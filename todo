@@ -4,4 +4,9 @@
 * better fonts on map (DONE)
 * multiple-image png + DHTML compositing map (DONE)
 
-* discard outliers
+* discard outliers. Need to pay special attention to these sparse neighborhoods:
+  * Bayview
+  * Ingleside / SFSU / CCSF
+  * Laurel Heights / Presidio
+  * Mission District
+  * West Portal / Forest Hill
