@@ -13,21 +13,22 @@
 from hood import db, geocoder
 from config import config
 
-database = db.DB(config)
-geocoder.init(config)
+if __name__ == '__main__':
+    database = db.DB(config)
+    geocoder.init(config)
 
-fixable_rows = database.get_fixable()
+    fixable_rows = database.get_fixable()
 
-print len(fixable_rows), 'rows to fix'
-fixed = 0
-for r in fixable_rows:
-    id, created, updated, url, hood, hood_id, source, loc, latitude, longitude = r
-    print 'trying to fix', hood, loc
-    latitude, longitude = geocoder.geocode(loc)
-    if latitude is not None and longitude is not None:
-        print 'found', latitude, longitude
-        fixed += 1
-        database.update_location(id, {'lat':latitude, 'long':longitude})
+    print len(fixable_rows), 'rows to fix'
+    fixed = 0
+    for r in fixable_rows:
+        id, created, updated, url, hood, hood_id, source, loc, latitude, longitude = r
+        print 'trying to fix', hood, loc
+        latitude, longitude = geocoder.geocode(loc)
+        if latitude is not None and longitude is not None:
+            print 'found', latitude, longitude
+            fixed += 1
+            database.update_location(id, {'lat':latitude, 'long':longitude})
 
-database.close_db()
-print 'fixed', fixed, 'rows'
+    database.close_db()
+    print 'fixed', fixed, 'rows'

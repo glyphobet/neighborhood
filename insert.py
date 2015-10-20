@@ -16,44 +16,45 @@ from hood import import db, geocoder
 from config import config
 
 
-geocoder.init(config)
+if __name__ == '__main__':
+    geocoder.init(config)
 
-print 'caution!'
-#sys.exit()
-test = False
+    print 'caution!'
+    #sys.exit()
+    test = False
 
-if not test:
-    database = db.DB(config)
+    if not test:
+        database = db.DB(config)
 
-while 1:
-    try:
-        l = raw_input('location:> ')
-        l = l.lower()
-    except EOFError:
-        break
-    except KeyboardInterrupt:
-        break
+    while 1:
+        try:
+            l = raw_input('location:> ')
+            l = l.lower()
+        except EOFError:
+            break
+        except KeyboardInterrupt:
+            break
 
-    try:
-        h = raw_input('neighborhood:> ')
-    except EOFError:
-        break
-    except KeyboardInterrupt:
-        break    
+        try:
+            h = raw_input('neighborhood:> ')
+        except EOFError:
+            break
+        except KeyboardInterrupt:
+            break
 
-    latitude, longitude = geocoder.geocode(l)
-    if latitude is not None and longitude is not None:
-        print 'inserting', latitude, longitude, h
-        values = {
-            'loc' :l        ,
-            'hood':h        ,
-            'lat' :latitude ,
-            'long':longitude,
+        latitude, longitude = geocoder.geocode(l)
+        if latitude is not None and longitude is not None:
+            print 'inserting', latitude, longitude, h
+            values = {
+                'loc' :l        ,
+                'hood':h        ,
+                'lat' :latitude ,
+                'long':longitude,
             }
-        if not test:
-            database.insert_location(values)
-    else:
-        print 'fail'
+            if not test:
+                database.insert_location(values)
+        else:
+            print 'fail'
 
-if not test:
-    database.close_db()
+    if not test:
+        database.close_db()
