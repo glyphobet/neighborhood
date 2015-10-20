@@ -1,7 +1,7 @@
 * add extra neighborhoods (DONE)
 * add jscript add-neighborhood code (DONE)
 * fix zoom map viewport to not overflow small map (DONE)
+* better fonts on map (DONE)
+* multiple-image png + DHTML compositing map (DONE)
 
 * discard outliers
-* better fonts on map
-* multiple-image png + DHTML compositing map
