@@ -49,10 +49,12 @@ for r in variants:
         for b in variants:
             if r == g == b:
                 continue  # skip greys
-            colors.append((int(round(r*0xff)),
-                           int(round(g*0xff)),
-                           int(round(b*0xff)),
-                           neighborhood_color_alpha))
+            colors.append((
+                int(round(r*0xff)),
+                int(round(g*0xff)),
+                int(round(b*0xff)),
+                neighborhood_color_alpha,
+            ))
 
 # sort lighter colors before dark ones
 colors.sort(lambda a,b: cmp(sum(b[:3]), sum(a[:3])))
