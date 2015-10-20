@@ -46,7 +46,7 @@ def scrape_HTML(base_url, page=''):
     if html_url in html_pages:
         return
     html_pages.append(html_url)
-    
+
     database = db.DB(config)
 
     sock = urllib.urlopen(html_url)
@@ -129,7 +129,7 @@ def scrape_RSS(rss_url):
         _scrape_posting(database, hood, url)
         time.sleep(15)
 
-        if test: print 
+        if test: print
     database.close_db()
 
 
@@ -170,7 +170,7 @@ def _scrape_posting(database, hood, url):
                 'loc' :loc      ,
                 'lat' :latitude ,
                 'long':longitude,
-                }
+            }
             database.insert_location(values)
 
 
