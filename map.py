@@ -89,7 +89,7 @@ def draw_blobs(draw, color, points):
 def show(image):
     tmp_name = '/tmp/tmp.png'
     image.save(tmp_name)
-    os.system('%s %s' % (config['viewer'], tmp_name))
+    os.system('{} {}'.format(config['viewer'], tmp_name))
 
 
 class LinearProjector(object):
@@ -220,9 +220,6 @@ for point in no_hood_points:
 no_hood_image.save('{}/no hood.{}'.format(config['map_path'], config['output_format']))
 # show(no_hood_image)
 
-
-label1 = '%d distinct locations in %d neighborhoods' % (total_points, len(hoods))
-label2 = '%d distinct locations in unknown neighborhoods' % len(no_hood_points)
-print(label1)
-print(label2)
+print('{} distinct locations in {} neighborhoods'.format(total_points, len(hoods)))
+print('{} distinct locations in unknown neighborhoods'.format(len(no_hood_points)))
 print("{:0.2f} seconds total".format(time.time() - start))
