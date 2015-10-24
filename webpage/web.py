@@ -221,10 +221,11 @@ def handler(req):
         error_str = fake_file.getvalue()
         fake_file.close()
 
+        msg = "Subject: Neighborhood web.py Exception\n\n" + error_str
         try:
             smtp = smtplib.SMTP('localhost')
             addr = 'matt-hood@theory.org'
-            smtp.sendmail(addr, addr, error_str)
+            smtp.sendmail(addr, addr, msg)
             smtp.quit()
         except smtplib.SMTPException:
             pass
